@@ -1,6 +1,72 @@
+# Deployment Guide
+
+This repository supports multiple deployment options:
+1. **GitHub Pages** - Simple, free hosting for static sites (recommended for getting started)
+2. **Cloud Providers** - AWS/GCP/Azure with OIDC authentication (for production)
+
+---
+
+## 🚀 GitHub Pages Deployment (Quick Start)
+
+### Overview
+
+GitHub Pages is the simplest way to deploy this application. It's free, requires no cloud provider setup, and works out of the box.
+
+### Setup Steps
+
+1. **Enable GitHub Pages in your repository:**
+   - Go to **Settings** → **Pages**
+   - Under "Build and deployment", select **GitHub Actions** as the source
+   
+2. **Deploy:**
+   - Push to `main` branch or manually trigger the workflow from the Actions tab
+   - The site will be available at `https://<username>.github.io/<repository-name>/`
+   - For this repository: `https://kaospan.github.io/heal/`
+
+### How It Works
+
+The `.github/workflows/deploy-pages.yml` workflow automatically:
+- Builds the project with the correct base path
+- Deploys to GitHub Pages
+- Handles SPA routing with 404.html fallback
+
+### Configuration
+
+The build configuration automatically determines the base path from the repository name:
+- **Priority**: `VITE_BASE_PATH` > `GITHUB_REPOSITORY` > fallback to `/heal/`
+- The workflow passes `GITHUB_REPOSITORY` automatically
+- For custom base paths, set the `VITE_BASE_PATH` environment variable
+
+### Testing Locally
+
+To test the GitHub Pages build locally:
+
+```bash
+# Build with GitHub Pages configuration
+GITHUB_PAGES=true GITHUB_REPOSITORY=kaospan/heal npm run build
+
+# Or with a custom base path
+GITHUB_PAGES=true VITE_BASE_PATH=/my-app/ npm run build
+```
+
+### Troubleshooting
+
+**Issue: Assets not loading**
+- Verify GitHub Pages is enabled in repository settings
+- Check that the base path matches your repository name
+- Ensure the workflow has completed successfully
+
+**Issue: Routes not working**
+- The 404.html file handles client-side routing
+- Make sure both `.nojekyll` and `404.html` exist in the dist folder
+
+---
+
+## 🏗️ Cloud Provider Deployment (Advanced)
+
 # GitHub Environments & Deployment Setup Guide
 
-This repository uses GitHub Environments for secure, gated deployments with OIDC authentication.
+This section covers advanced deployment to cloud providers with OIDC authentication.
 
 ## 🏗️ Environment Setup
 
