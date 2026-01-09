@@ -29,6 +29,9 @@ import HealIT from "./pages/HealIT";
 
 const queryClient = new QueryClient();
 
+// Set basename for GitHub Pages deployment
+const basename = import.meta.env.BASE_URL || '/';
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
@@ -37,7 +40,7 @@ const App = () => (
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
+            <BrowserRouter basename={basename}>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />

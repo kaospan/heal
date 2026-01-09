@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      // GitHub Pages SPA redirect handler
+      // This script takes the current URL path and redirects to index.html
+      // with the path as a query parameter that the main app can handle
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          window.location.replace(redirect);
+        } else {
+          var path = window.location.pathname.slice(1);
+          var search = window.location.search;
+          var hash = window.location.hash;
+          
+          // Store the full path for the index page to restore
+          sessionStorage.setItem('redirect', window.location.pathname + search + hash);
+          
+          // Redirect to the base index.html
+          window.location.replace(window.location.origin + '/heal/');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
