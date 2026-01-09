@@ -30,7 +30,7 @@ import HealIT from "./pages/HealIT";
 const queryClient = new QueryClient();
 
 // Set basename for GitHub Pages deployment
-const basename = import.meta.env.BASE_URL || '/';
+const basename = import.meta.env.BASE_URL;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
