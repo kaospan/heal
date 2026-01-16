@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      // GitHub Pages SPA redirect handler
+      // This script takes the current URL path and redirects to index.html
+      // with the path stored in session storage for the main app to restore
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          window.location.replace(redirect);
+        } else {
+          var pathname = window.location.pathname;
+          var search = window.location.search;
+          var hash = window.location.hash;
+          
+          // Store the full path for the index page to restore
+          sessionStorage.setItem('redirect', pathname + search + hash);
+          
+          // Determine base path by finding the repository name
+          // For GitHub Pages, the URL is typically: username.github.io/repo-name/path
+          // The first path segment is always the repository name
+          var pathSegments = pathname.split('/').filter(Boolean);
+          var basePath = pathSegments.length > 0 ? '/' + pathSegments[0] + '/' : '/';
+          
+          // Redirect to the base index.html
+          window.location.replace(window.location.origin + basePath);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>

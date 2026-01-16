@@ -62,6 +62,23 @@ This project is built with:
 
 ## How can I deploy this project?
 
+### GitHub Pages Deployment (Recommended for Simple Hosting)
+
+This project is configured for GitHub Pages deployment. To deploy:
+
+1. **Enable GitHub Pages in your repository:**
+   - Go to Settings > Pages
+   - Under "Build and deployment", select "GitHub Actions" as the source
+   
+2. **Deploy:**
+   - Push to `main` branch or manually trigger the workflow
+   - The site will be available at `https://kaospan.github.io/heal/`
+
+The deployment workflow (`.github/workflows/deploy-pages.yml`) will automatically:
+- Build the project with the correct base path
+- Deploy to GitHub Pages
+- Handle SPA routing with 404.html fallback
+
 ### Quick Deploy
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 

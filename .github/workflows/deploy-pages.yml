@@ -27,6 +27,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          GITHUB_PAGES: true
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       # Vite commonly outputs to dist/
       - name: Upload Pages artifact
